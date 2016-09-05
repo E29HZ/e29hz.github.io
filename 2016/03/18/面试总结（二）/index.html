@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>面试总结（二） | e29hz&#39; blog | Simplicity is the ultimate sophistication.</title>
+
+  
+  <meta name="author" content="e29hz">
+  
+
+  
+  <meta name="description" content="Peace means having a bigger stick than the other guy">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="面试总结（二）"/>
+
+  <meta property="og:site_name" content="e29hz&#39; blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="e29hz&#39; blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">e29hz&#39; blog</a>
+    </h1>
+    <p class="site-description">Simplicity is the ultimate sophistication.</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>面试总结（二）</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/03/18/面试总结（二）/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-03-18T04:52:45.000Z">
+          2016-03-18
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <hr>
+<h2 id="是时候再来一波面试总结了"><a href="#是时候再来一波面试总结了" class="headerlink" title="是时候再来一波面试总结了"></a>是时候再来一波面试总结了</h2><hr>
+<blockquote>
+<p>And…来个小结吧.</p>
+</blockquote>
+<h3 id="1-线程间通信：在1个进程中，线程往往不是孤立存在的，多个线程之间需要经常进行通信"><a href="#1-线程间通信：在1个进程中，线程往往不是孤立存在的，多个线程之间需要经常进行通信" class="headerlink" title="1. 线程间通信：在1个进程中，线程往往不是孤立存在的，多个线程之间需要经常进行通信"></a>1. 线程间通信：在1个进程中，线程往往不是孤立存在的，多个线程之间需要经常进行通信</h3><h4 id="线程间通信的体现"><a href="#线程间通信的体现" class="headerlink" title="线程间通信的体现:"></a>线程间通信的体现:</h4><ul>
+<li><p>1个线程传递数据给另1个线程</p>
+</li>
+<li><p>在1个线程中执行完特定任务后，转到另1个线程继续执行任务</p>
+</li>
+</ul>
+<h4 id="线程间通信常用方法"><a href="#线程间通信常用方法" class="headerlink" title="线程间通信常用方法:"></a>线程间通信常用方法:</h4><ul>
+<li>NSThread</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">- (void)performSelectorOnMainThread:(SEL)aSelector withObject:(id)arg waitUntilDone:(BOOL)wait;</div><div class="line">- (void)performSelector:(SEL)aSelector onThread:(NSThread *)thr withObject:(id)arg waitUntilDone:(BOOL)wait;</div></pre></td></tr></table></figure>
+<ul>
+<li>GCD</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//获取一个全局串行队列</div><div class="line">dispatch_queue_t queue = dispatch_get_global_queue();</div><div class="line">dispatch_async(queue, ^&#123;</div><div class="line">    //打印当前线程</div><div class="line">    NSLog(@&quot;%@&quot;,[NSThread currentThread]);</div><div class="line">    NSLog(@&quot;进行操作&quot;);</div><div class="line">    //回到主线程</div><div class="line">    dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">        NSLog(@&quot;获取前一个线程的结果,在主线程中进行操作&quot;);</div><div class="line">        //打印当前线程</div><div class="line">        NSLog(@&quot;%@&quot;,[NSThread currentThread]);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="2-Automatic-Reference-Counting-和-Garbage-Collection"><a href="#2-Automatic-Reference-Counting-和-Garbage-Collection" class="headerlink" title="2. Automatic Reference Counting 和 Garbage Collection"></a>2. Automatic Reference Counting 和 Garbage Collection</h3><ul>
+<li><p>(Automatic Reference Counting)自动引用计数是由编译器在编译后的代码中假如retain/release的调用，编译器可以让临时对象的生命周期刚刚好，不会过早被release，也不会这个对象不再需要后很久才释放。而且，ARC只管Objective-C那部分，而管不了C，CoreFoundation那部分。</p>
+</li>
+<li><p>(Garbage Collection)垃圾回收：这种方式和java类似，在你的程序的执行过程中。始终有一个高人在背后准确地帮你收拾垃圾，你不用考虑它什么时候开始工作，怎样工作。但需要消耗一定的资源,所以Apple不让iOS开发者使用.</p>
+</li>
+</ul>
+<h3 id="3-Linux中的vi指令有什么用-这题我就懵逼了-￣-￣"><a href="#3-Linux中的vi指令有什么用-这题我就懵逼了-￣-￣" class="headerlink" title="3. Linux中的vi指令有什么用?(这题我就懵逼了(￣.￣))"></a>3. Linux中的vi指令有什么用?(这题我就懵逼了(￣.￣))</h3><ul>
+<li>这个我是真放弃了, 虽然我用过, 但我哪能记住啊, 上个链接好好学习一下吧!<br><a href="http://www.cnblogs.com/88999660/articles/1581524.html" target="_blank" rel="external">Linux下vi命令大全</a></li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 e29hz
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
