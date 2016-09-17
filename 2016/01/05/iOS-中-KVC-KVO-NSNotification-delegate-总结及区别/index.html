@@ -91,7 +91,10 @@
   <div class="article-content">
     <div class="entry">
       
-        <h3 id="最近在开发时遇到了一点问题-需要用到KVC-感觉当时学的还可以-一用就蒙圈了-在网上查了些资料-就深入的学习了一下"><a href="#最近在开发时遇到了一点问题-需要用到KVC-感觉当时学的还可以-一用就蒙圈了-在网上查了些资料-就深入的学习了一下" class="headerlink" title="最近在开发时遇到了一点问题,需要用到KVC,感觉当时学的还可以,一用就蒙圈了.在网上查了些资料,就深入的学习了一下."></a>最近在开发时遇到了一点问题,需要用到KVC,感觉当时学的还可以,一用就蒙圈了.在网上查了些资料,就深入的学习了一下.</h3><a id="more"></a>
+        <blockquote>
+<p>最近在开发时遇到了一点问题,需要用到KVC,感觉当时学的还可以,一用就蒙圈了.在网上查了些资料,就深入的学习了一下.</p>
+</blockquote>
+<a id="more"></a>
 <h3 id="1-KVC，即是指-NSKeyValueCoding，一个非正式的Protocol，提供一种机制来间接访问对象的属性。而不是通过调用Setter、Getter方法访问。KVO-就是基于-KVC-实现的关键技术之一。"><a href="#1-KVC，即是指-NSKeyValueCoding，一个非正式的Protocol，提供一种机制来间接访问对象的属性。而不是通过调用Setter、Getter方法访问。KVO-就是基于-KVC-实现的关键技术之一。" class="headerlink" title="1. KVC，即是指 NSKeyValueCoding，一个非正式的Protocol，提供一种机制来间接访问对象的属性。而不是通过调用Setter、Getter方法访问。KVO 就是基于 KVC 实现的关键技术之一。"></a>1. KVC，即是指 NSKeyValueCoding，一个非正式的Protocol，提供一种机制来间接访问对象的属性。而不是通过调用Setter、Getter方法访问。KVO 就是基于 KVC 实现的关键技术之一。</h3><h4 id="KVC的常用方法："><a href="#KVC的常用方法：" class="headerlink" title="KVC的常用方法："></a>KVC的常用方法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (id)valueForKey:(NSString *)key;</div><div class="line">- (void)setValue:(id)value forKey:(NSString *)key;</div><div class="line">- </div><div class="line">// valueForKey 的方法根据key的值读取对象的属性，</div><div class="line"></div><div class="line">// setValue: forKey: 是根据key的值来写对象的属性。</div></pre></td></tr></table></figure>
 <h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><ol>
 <li>key的值必须正确，如果拼写错误，会出现异常</li>
